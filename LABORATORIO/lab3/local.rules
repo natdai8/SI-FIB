@@ -1,0 +1,12 @@
+# $Id: local.rules,v 1.11 2004/07/23 20:15:44 bmc Exp $
+# ----------------
+# LOCAL RULES
+# ----------------
+# This file intentionally does not come with signatures.  Put your local
+# additions here.
+  
+  alert icmp any any -> $HOME_NET any (msg:"ICMP test"; sid:10000001; rev:001;)
+  alert tcp $HOME_NET any -> 127.0.0.1 80 (flags: S; msg:"Detecting DoS/DDoS attack"; flow: stateless; detection_filter: track by_dst, count 10, seconds 10; sid: 10000002; rev: 001;) 
+  alert ip any any -> $HOME_NET any (content:"facebook.com"; msg: "website access detected"; sid: 10000003; rev:001;)
+  alert ip any any -> $HOME_NET any (content:"twitter.com"; msg: "website access detected"; sid: 10000004; rev:001;)
+  alert ip any any -> $HOME_NET any (content:"youtube.com"; msg: "website access detected"; sid: 10000005; rev:001;)
